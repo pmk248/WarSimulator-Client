@@ -38,16 +38,14 @@ const defenseSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // Handle intercept attack
       .addCase(interceptAttack.fulfilled, (state, action) => {
         const index = state.attacks.findIndex((a) => a.id === action.payload.id);
         if (index !== -1) {
-          state.attacks[index].status = action.payload.status; // Update status to intercepted/handled
+          state.attacks[index].status = action.payload.status; 
         }
       })
-      // Fetch attacks from the API
       .addCase(fetchPendingAttacks.fulfilled, (state, action) => {
-        state.attacks = action.payload; // Directly assign all attacks to the array
+        state.attacks = action.payload;
       });
   },
 });

@@ -6,32 +6,46 @@ import { useAppDispatch, useAppSelector } from '../redux/hooks';
 
 const Defender: React.FC = () => {
   const dispatch = useAppDispatch();
-  const attacks = useAppSelector((state) => state.defense.attacks); // Use attacks array from the state
-  const ammo = useAppSelector((state) => state.attack.ammo);
-
-  // Fetch all attacks (both pending and past)
+  
+  const pendingAttacks = useAppSelector((state) => state.defense.attacks); 
+  const ammo = useAppSelector((state) => state.attack.ammo);  
+  
   useEffect(() => {
     dispatch(fetchPendingAttacks());
   }, [dispatch]);
 
-  const handleIntercept = (attackId: string) => {
+  const handleIntercept = (attackId: string, missileType: string) => {
     dispatch(interceptAttack(attackId));
+
+    if (ammo[missileType] && ammo[missileType] > 0) {
+      dispatch({
+        type: 'attack/setAmmo',  
+        payload: {
+          missileType,
+          quantity: ammo[missileType] - 1,
+        }
+      });
+    }
   };
 
   return (
     <div>
       <h2>War Room - IDF</h2>
+
       <AmmoBar ammo={ammo} />
 
-      <h3>All Attacks</h3>
+      <h3>Pending Attacks</h3>
       <ul>
-        {attacks.map((attack) => (
+        {pendingAttacks.map((attack) => (
           <li key={attack.id}>
             {attack.missileType} - <CountdownTimer timeToImpact={attack.timeToImpact} />
-            
-            {/* Show the intercept button only for pending attacks */}
             {attack.status === 'pending' && (
-              <button onClick={() => handleIntercept(attack.id)}>Intercept</button>
+              <button
+                onClick={() => handleIntercept(attack.id, attack.missileType)}
+                disabled={ammo[attack.missileType] <= 0} 
+              >
+                Intercept
+              </button>
             )}
           </li>
         ))}
