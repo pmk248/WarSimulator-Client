@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { UserRole } from '../../models/AuthDtos';
+import { UserRole } from '../../models/Dtos';
 
 interface AuthState {
   token: string | null;

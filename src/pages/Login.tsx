@@ -3,7 +3,7 @@ import { loginUser } from '../api/authAPI';
 import { setAuth } from '../redux/slices/authSlice';
 import { useAppDispatch } from '../redux/hooks';
 import { useNavigate } from 'react-router-dom';
-import { UserRole } from '../models/AuthDtos';
+import { UserRole } from '../models/Dtos';
 
 interface LoginResponse {
   token: string;

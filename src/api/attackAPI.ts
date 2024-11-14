@@ -3,7 +3,7 @@ import axios from 'axios';
 const BASE_URL = "http://localhost:8200/war"
 
 export const launchAttackAPI = async (missileType: string, targetRegion: string) => {
-  const response = await axios.post(`${BASE_URL}attack`, 
+  const response = await axios.post(`${BASE_URL}/attack`, 
     { missileType, targetRegion },
     {
       headers: {

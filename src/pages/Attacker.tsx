@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { fetchAttackLogs, launchAttack } from '../redux/slices/attackSlice';
 import AmmoBar from '../components/AmmoBar';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { Region } from '../models/AuthDtos';
+import { Region } from '../models/Dtos';
 
 const Attacker: React.FC = () => {
   const dispatch = useAppDispatch();

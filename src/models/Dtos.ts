@@ -24,3 +24,8 @@ export enum Region {
     Center   = "Center",
     WestBank = "West Bank"
 }
+
+export type defenseDto = {
+    attackId        : string,
+    interceptorType : string
+}

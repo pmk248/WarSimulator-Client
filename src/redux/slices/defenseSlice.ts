@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { interceptAttackAPI, fetchPendingAttacksAPI } from '../../api/defenseAPI';
+import { interceptAttackAPI } from '../../api/defenseAPI';
+import { defenseDto } from '../../models/Dtos';
+import { fetchAttackLogsAPI } from '../../api/attackAPI';
 
 interface AttackLog {
   id: string;
@@ -23,13 +25,13 @@ const initialState: DefenseState = {
 
 export const interceptAttack = createAsyncThunk(
   'defense/intercept',
-  async (attackId: string) => {
-    return await interceptAttackAPI(attackId);
+  async (dto: defenseDto) => {
+    return await interceptAttackAPI(dto);
   }
 );
 
 export const fetchPendingAttacks = createAsyncThunk('defense/fetchPending', async () => {
-  return await fetchPendingAttacksAPI();
+  return await fetchAttackLogsAPI();
 });
 
 const defenseSlice = createSlice({

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LoginDto, RegisterDTO } from '../models/AuthDtos';
+import { LoginDto, RegisterDTO } from '../models/Dtos';
 
 const BASE_API = "http://localhost:8200/auth"
 
